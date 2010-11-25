@@ -20,7 +20,7 @@ public class HomeController {
 	}
 	
 	@Get
-	@Path("/")
+	@Path("/user")
 	@Public
 	public void index() {
 		result.include("produtos", estoque.produtosAVenda());

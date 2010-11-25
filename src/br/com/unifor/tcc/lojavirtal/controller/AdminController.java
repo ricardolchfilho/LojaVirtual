@@ -29,7 +29,7 @@ public class AdminController {
 	}
 
 	@Get
-	@Path("/admin")
+	@Path("/")
 	public void index() {
 		result.include("produtos", estoque.todos())
 				.include("user", userService.getCurrentUser())
