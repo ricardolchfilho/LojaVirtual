@@ -27,11 +27,6 @@ public class Produto {
 
 	private boolean vendido = false;
 	
-	@NotSaved
-	private Categoria categoria;
-	
-	private Key<Categoria> categoriaKey;
-	
 	public Produto() {
 	}
 
@@ -41,21 +36,8 @@ public class Produto {
 		this.preco = preco.doubleValue();
 	}
 	
-	public Produto(String nome, String descricao, BigDecimal preco, Categoria categoria) {
-		this(nome, descricao, preco);
-		this.categoria = categoria;
-	}
-	
 	public Long getCodigo() {
 		return codigo;
-	}
-	
-	@PrePersist
-	void onSave(Objectify ofy) {
-		if (categoria != null) {
-			ofy.put(categoria);
-			this.categoriaKey = new Key<Categoria>(Categoria.class, categoria.getCodigo());
-		}
 	}
 	
 	public String getNome() {
@@ -82,13 +64,7 @@ public class Produto {
 		this.preco = preco;
 	}
 
-	public Categoria getCategoria() {
-		return categoria;
-	}
-
-	public void setCategoria(Categoria categoria) {
-		this.categoria = categoria;
-	}
+	
 
 	public void definirComoVendido() {
 		this.vendido = true;
@@ -142,5 +118,10 @@ public class Produto {
 	public String toString() {
 		return this.nome;
 	}
+
+	public void setCodigo(Long codigo) {
+		this.codigo = codigo;
+	}
+	
 
 }

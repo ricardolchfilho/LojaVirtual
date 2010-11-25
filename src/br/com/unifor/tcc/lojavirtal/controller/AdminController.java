@@ -8,7 +8,6 @@ import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.view.Results;
 import br.com.unifor.tcc.lojavirtal.model.EstoqueDeProdutos;
 import br.com.unifor.tcc.lojavirtal.model.Produto;
-import br.com.unifor.tcc.lojavirtal.model.TodasCategorias;
 
 import com.google.appengine.api.users.UserService;
 
@@ -19,15 +18,13 @@ public class AdminController {
 
 	private final Result result;
 
-	private final TodasCategorias categorias;
 
 	private final UserService userService;
 
 	public AdminController(EstoqueDeProdutos estoque, Result result,
-			TodasCategorias categorias, UserService userService) {
+			UserService userService) {
 		this.estoque = estoque;
 		this.result = result;
-		this.categorias = categorias;
 		this.userService = userService;
 	}
 
@@ -42,20 +39,21 @@ public class AdminController {
 	@Get
 	@Path("/admin/produto/adiciona")
 	public void adicionarProduto() {
-		result.include("categorias", categorias.listar());
+		result.include("user", userService.getCurrentUser())
+		.include("logoutUrl", userService.createLogoutURL("/admin"));
 	}
 
 	@Post
 	@Path("/admin/produto/adiciona")
 	public void adicionarProduto(final Produto produto) {
-		estoque.adicionar(produto);
+		estoque.adicionarEditar(produto);
 
 		result.include("aviso", produto.getNome() + " adicionado com sucesso!")
 				.use(Results.logic()).redirectTo(getClass()).index();
 	}
 
 	@Get
-	@Path("/admin/produto/excluir")
+	@Path("/admin/produto/exclui")
 	public void deletarProduto(Long codigo) {
 		estoque.deletar(codigo);
 
@@ -64,10 +62,22 @@ public class AdminController {
 	}
 
 	@Get
-	@Path("/admin/produto/editar")
-	public void editarProduto(Long codigo){
-		Produto produto = estoque.obter(codigo);
-		result.include("produto", produto);
-	
+	@Path("/admin/produto/edita")
+	public Produto editarProduto(Long codigo){
+		
+		result.include("user", userService.getCurrentUser())
+		.include("logoutUrl", userService.createLogoutURL("/admin"));
+		
+		return estoque.obter(codigo);
 	}
+	
+	@Post
+	@Path("/admin/produto/edita")
+	public void editarProduto(Produto produto){
+		estoque.adicionarEditar(produto);
+		
+		result.include("aviso",produto.getNome() + " alterado com sucesso!")
+		.use(Results.logic()).redirectTo(getClass()).index();
+	}
+	
 }

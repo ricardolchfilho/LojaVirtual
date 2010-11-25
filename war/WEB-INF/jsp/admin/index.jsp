@@ -17,8 +17,8 @@
 						<td>${produto.nome }</td>
 						<td>${produto.descricao }</td>
 						<td align="right">${produto.preco}</td>
-						<td><a href="<c:url value="/admin/produto/editar"/>">Editar</a></td>
-						<td><a href="<c:url value="/admin/produto/excluir?codigo=${produto.codigo}"/>">Excluir</a></td>
+						<td><a href="<c:url value="/admin/produto/edita?codigo=${produto.codigo}"/>">Editar</a></td>
+						<td><a href="<c:url value="/admin/produto/exclui?codigo=${produto.codigo}"/>">Excluir</a></td>
 					</tr>
 				</c:forEach>
 			</tbody>

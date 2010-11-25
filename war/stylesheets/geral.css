@@ -1,8 +1,16 @@
-*{margin:0px; padding:0px; font-family:Arial, Helvetica, sans-serif;}
+*{margin:0px; padding:0px; font-family:'trebuchet',Arial, Helvetica, sans-serif;}
 
 #header {
-	height: 100px;
-	background-color: yellow;
+	height: 70px;
+	padding: 30px 0 0 10px;
+	background: url("../images/backgroundheader.jpg") repeat;
+	color: #FFF;
+}
+#header a{
+	color: #FFF
+}
+#header h1{
+	float: left;
 }
 #carrinho {
 	height: 80px;
@@ -50,14 +58,14 @@
 	clear:both;
 }
 body {
-	background-color: navy;
+	background-color: silver;
 }
 #body {
 	border-top: 1px solid gray;
 	width: 100%;
 	margin: 0 auto;
-	min-height: 300px;
-	padding: 10px 0;
+	min-height: 700px;
+	padding: 10px 0 0 10px;
 	float:left;
 	background: url("../images/background-texture.gif") repeat;
 }

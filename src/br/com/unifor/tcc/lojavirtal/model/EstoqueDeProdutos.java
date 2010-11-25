@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface EstoqueDeProdutos {
 	
-	void adicionar(Produto produto);
+	void adicionarEditar(Produto produto);
 	
 	void deletar (Long  codigo);
 	
@@ -14,8 +14,4 @@ public interface EstoqueDeProdutos {
 	
 	List<Produto> todos();
 	
-	List<Produto> daCategoria(Categoria categoria);
-
-	Produto editar(Produto produto);
-
 }

@@ -9,9 +9,10 @@
 		
 		<label for="descricao">Descrição:</label> 
 		<textarea id="descricao" name="produto.descricao" style="width: 150px"></textarea>
-	
+		
 		<label for="preco">Preço:</label>
 		<input id="preco" type="text" name="produto.preco" style="width: 100px"/>
+		
 		<button type="submit">Enviar</button>
 		
 	</fieldset>
