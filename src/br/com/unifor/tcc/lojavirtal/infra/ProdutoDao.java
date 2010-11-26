@@ -10,28 +10,28 @@ import com.googlecode.objectify.Objectify;
 
 @Component
 public class ProdutoDao implements EstoqueDeProdutos {
-	
+
 	private final Objectify objectify;
 
 	public ProdutoDao(Objectify objectify) {
 		this.objectify = objectify;
 	}
-	
+
 	@Override
 	public void adicionarEditar(Produto produto) {
 		objectify.put(produto);
 	}
-	
+
 	@Override
 	public List<Produto> produtosAVenda() {
-		return (List<Produto>) objectify.query(Produto.class).filter("vendido", false).list();
+		return (List<Produto>) objectify.query(Produto.class)
+				.filter("vendido", false).list();
 	}
 
 	@Override
 	public List<Produto> todos() {
 		return (List<Produto>) objectify.query(Produto.class).list();
 	}
-
 
 	@Override
 	public Produto obter(Long codigo) {
@@ -41,6 +41,12 @@ public class ProdutoDao implements EstoqueDeProdutos {
 	@Override
 	public void deletar(Long codigo) {
 		objectify.delete(Produto.class, codigo);
+	}
+
+	@Override
+	public List<Produto> obter(String nome) {
+		return (List<Produto>) objectify.query(Produto.class)
+				.filter("nome", nome).list();
 	}
 
 }

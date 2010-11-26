@@ -35,8 +35,8 @@ public class AuthorizationInterceptor implements Interceptor {
 			userService.isUserAdmin();
 			stack.next(method, object);
 		} catch (IllegalStateException e) {
-			String loginUrl = userService.createLoginURL("/admin");
-			result.use(Results.page()).redirect(loginUrl);
+			String loginUrl = userService.createLoginURL("/produtos");
+			result.redirectTo(loginUrl);
 		}
 	}
 	

@@ -13,5 +13,7 @@ public interface EstoqueDeProdutos {
 	List<Produto> produtosAVenda();
 	
 	List<Produto> todos();
+
+	List<Produto> obter(String nome);
 	
 }
