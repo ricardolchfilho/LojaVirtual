@@ -6,7 +6,7 @@
 <html lang="pt-BR">
 
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	<title>Loja Virtual</title>
 	<meta name="author" content="Ricardo Luiz">
 	<link type="text/css" rel="stylesheet" media="screen, projection" href='<c:url value="/stylesheets/geral.css" />' />
@@ -24,7 +24,7 @@
 		<h1>Loja Virtual</h1>
 		
 		<div id="carrinho">
-			<h3>Meu carrinho:</h3>
+			<h3><a href="<c:url value="/carrinho"/>"> Meu carrinho: </a></h3>
 			<c:if test="${empty carrinho or carrinho.totalDeItens eq 0 }">
 				<span>Você não possui itens no seu carrinho</span>
 			</c:if>
@@ -37,10 +37,12 @@
 				</ul>
 			</c:if>
 		</div>
+		
+		<br clear="all"/>
+		
 		<div class="navegacao">
 			<a href='<c:url value="${logoutUrl}" />'>logout ${user.nickname}</a>
 		</div>
-		
 	</div>
 	<div id="erros">
 		<ul>

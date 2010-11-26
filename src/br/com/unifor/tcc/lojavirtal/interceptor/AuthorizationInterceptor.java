@@ -32,7 +32,11 @@ public class AuthorizationInterceptor implements Interceptor {
 			Object object) throws InterceptionException {
 		
 		try {
-			userService.isUserAdmin();
+			if(userService.isUserAdmin()){
+				result.include("user", userService.getCurrentUser())
+				.include("logoutUrl", userService.createLogoutURL("/produtos"));
+			}
+			
 			stack.next(method, object);
 		} catch (IllegalStateException e) {
 			String loginUrl = userService.createLoginURL("/produtos");

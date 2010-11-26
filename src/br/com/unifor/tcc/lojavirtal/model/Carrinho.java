@@ -46,4 +46,9 @@ public class Carrinho {
 	public void setUnidades(Integer unidades) {
 		this.unidades = unidades;
 	}
+
+	public void remove(int indiceItem) {
+		Item removido = itens.remove(indiceItem);
+		total -= removido.getProduto().getPreco() * removido.getQuantidade();
+	}
 }

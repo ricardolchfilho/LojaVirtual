@@ -30,7 +30,8 @@
 	color: navy;
 }
 #carrinho span {
-	margin: 10px;	
+	margin: 10px;
+	color: red;	
 }
 #carrinho ul {
 	list-style: none;
@@ -175,4 +176,6 @@ table tfoot th {
 div.navegacao {
 	float: right;
 	text-align: right;
+	margin-right: 20px;
+	margin-top: 5px;
 }

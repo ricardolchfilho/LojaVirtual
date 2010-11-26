@@ -45,7 +45,7 @@ public class ProdutosController {
 	@Path("/produtos/busca")
 	public List<Produto> busca(String nome) {
 
-		List<Produto> produtoList = estoque.obter(nome);
+		List<Produto> produtoList = estoque.obter(nome); 
 		result.include("nome", nome)
 				.include("user", userService.getCurrentUser())
 				.include("logoutUrl", userService.createLogoutURL("/produtos"));
@@ -67,7 +67,7 @@ public class ProdutosController {
 	@Path("/produtos")
 	public void adicionarProduto(final Produto produto) {
 		validar(produto);
-		validator.onErrorUsePageOf(getClass()).adicionarProduto();
+		validator.onErrorRedirectTo(getClass()).adicionarProduto();
 		estoque.adicionarEditar(produto);
 		result.include("aviso", produto.getNome() + " adicionado com sucesso!")
 				.redirectTo(getClass()).lista();
@@ -93,7 +93,7 @@ public class ProdutosController {
 	@Path("/produtos/{produto.codigo}")
 	public void editarProduto(Produto produto) {
 		validar(produto);
-		validator.onErrorUsePageOf(getClass()).editarProduto(
+		validator.onErrorRedirectTo(getClass()).editarProduto(
 				produto.getCodigo());
 		estoque.adicionarEditar(produto);
 		result.include("aviso", produto.getNome() + " alterado com sucesso!")
@@ -125,5 +125,5 @@ public class ProdutosController {
 
 		});
 	}
-
+	
 }
