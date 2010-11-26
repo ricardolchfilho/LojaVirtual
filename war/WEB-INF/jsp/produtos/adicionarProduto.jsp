@@ -22,6 +22,6 @@
 </form>
 
 <script type="text/javascript">
-	$("#produtosForm").validate();
+	$('#produtosForm1').validate();
 </script>
 <%@ include file="../../../common/admin/footer.jsp"%>

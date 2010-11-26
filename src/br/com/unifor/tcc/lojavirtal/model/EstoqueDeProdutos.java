@@ -15,5 +15,7 @@ public interface EstoqueDeProdutos {
 	List<Produto> todos();
 
 	List<Produto> obter(String nome);
+
+	void recarrega(Produto produto);
 	
 }

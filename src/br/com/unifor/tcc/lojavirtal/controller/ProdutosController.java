@@ -33,6 +33,7 @@ public class ProdutosController {
 		this.userService = userService;
 	}
 
+	// Não pode ser usado por causa das restrições do GAE
 	@Get
 	@Path("/produtos/busca.json")
 	public void buscaJson(String q) {
@@ -43,8 +44,16 @@ public class ProdutosController {
 	@Get
 	@Path("/produtos/busca")
 	public List<Produto> busca(String nome) {
-		result.include("nome", nome);
-		return estoque.obter(nome);
+
+		List<Produto> produtoList = estoque.obter(nome);
+		result.include("nome", nome)
+				.include("user", userService.getCurrentUser())
+				.include("logoutUrl", userService.createLogoutURL("/produtos"));
+		if (produtoList.isEmpty()) {
+			result.include("aviso", "Nenhum produto com o nome '" + nome
+					+ "' encontrado!");
+		}
+		return produtoList;
 	}
 
 	@Get

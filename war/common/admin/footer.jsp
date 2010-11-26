@@ -17,7 +17,7 @@
 		var fadeBox = jQuery("#fade-box");
 		
 		if (fadeBox) {
-			fadeBox.fadeOut(2000)
+			fadeBox.fadeOut(4000)
 		}
 	
 	}) 

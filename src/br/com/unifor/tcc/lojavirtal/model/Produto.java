@@ -36,53 +36,10 @@ public class Produto {
 		this.preco = preco.doubleValue();
 	}
 	
-	public Long getCodigo() {
-		return codigo;
-	}
-	
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome.toUpperCase();
-	}
-
-	public String getDescricao() {
-		return descricao;
-	}
-
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
-
-	public Double getPreco() {
-		return preco;
-	}
-
-	public void setPreco(Double preco) {
-		this.preco = preco;
-	}
-
-	
-
 	public void definirComoVendido() {
 		this.vendido = true;
 	}
 	
-	public boolean isVendido() {
-		return vendido;
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
-		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
-		return result;
-	}
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
@@ -114,13 +71,56 @@ public class Produto {
 		return true;
 	}
 
+	public Long getCodigo() {
+		return codigo;
+	}
+
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public Double getPreco() {
+		return preco;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
+		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		return result;
+	}
+
+	
+
+	public boolean isVendido() {
+		return vendido;
+	}
+	
+	public void setCodigo(Long codigo) {
+		this.codigo = codigo;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome.toLowerCase();
+	}
+
+	public void setPreco(Double preco) {
+		this.preco = preco;
+	}
+
 	@Override
 	public String toString() {
 		return this.nome;
-	}
-
-	public void setCodigo(Long codigo) {
-		this.codigo = codigo;
 	}
 	
 

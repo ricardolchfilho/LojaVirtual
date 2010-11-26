@@ -1,4 +1,4 @@
-R<%@ include file="../../../common/admin/header.jsp"%>
+<%@ include file="../../../common/admin/header.jsp"%>
 	<c:if test="${empty produtos}">
 		<div>
 			<label style="color: red">Nenhum Produto Cadastrado!</label>
@@ -12,8 +12,9 @@ R<%@ include file="../../../common/admin/header.jsp"%>
 						<th>Nome</th>
 						<th>Descrição</th>
 						<th>Preço</th>
-						<th> </th>
-						<th> </th>
+						<th>Comprar</th>
+						<th>Editar</th>
+						<th>Excluir </th>
 					</tr>
 				</thead>
 				<tbody>
@@ -22,6 +23,14 @@ R<%@ include file="../../../common/admin/header.jsp"%>
 							<td>${produto.nome }</td>
 							<td>${produto.descricao }</td>
 							<td align="right">${produto.preco}</td>
+							<td>
+								<form action="<c:url value="/carrinho"/>" method="POST">
+									<input type="hidden" name="item.produto.codigo"
+										value="${produto.codigo}"/>
+									<input class="qtde" name="item.quantidade" value="1"/>
+									<button type="submit">Comprar</button>
+								</form>
+							</td>
 							<td><a href="<c:url value="/produtos/${produto.codigo}"/>">Editar</a></td>
 							<td>
 								<form action="<c:url value="/produtos/${produto.codigo}"/>" method="POST">

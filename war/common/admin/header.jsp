@@ -21,14 +21,24 @@
 <body>
 	<div id="header">
 		
-		<h1>Administração</h1>
+		<h1>Loja Virtual</h1>
 		
-		<div style="float: right">
-			<div class="navegacao">
-				<nav>
-					<a href='<c:url value="${logoutUrl}" />'>logout ${user.nickname}</a>
-				</nav>
-			</div>
+		<div id="carrinho">
+			<h3>Meu carrinho:</h3>
+			<c:if test="${empty carrinho or carrinho.totalDeItens eq 0 }">
+				<span>Você não possui itens no seu carrinho</span>
+			</c:if>
+			<c:if test="${carrinho.totalDeItens > 0 }">
+				<ul>
+					<li><strong>Itens:</strong> ${carrinho.totalDeItens}</li>
+					<li><strong>Unidades:</strong> ${carrinho.unidades}</li>
+					<li><strong>Total:</strong>
+					<fmt:formatNumber type="currency" value="${carrinho.total}"/></li>
+				</ul>
+			</c:if>
+		</div>
+		<div class="navegacao">
+			<a href='<c:url value="${logoutUrl}" />'>logout ${user.nickname}</a>
 		</div>
 		
 	</div>
@@ -50,21 +60,6 @@
 					</form>
 					<script type="text/javascript">
 						$("#busca").puts("Busca produtos por nome");
-						$("#busca").autocomplete("<c:url value="/produtos/busca.json"/>", {
-								dataType: "json", 
-								parse: function(produtos) { 
-									return $.map(produtos, function(produto) {
-										return {
-											data: produto, 
-											value: produto.nome, 
-											result: produto.nome 
-										};
-									});
-								},
-							formatItem: function(produto) {
-								return produto.nome + "(" + produto.preco + ")";
-							}
-						});
 					</script>
 				</li>
 			</ul>

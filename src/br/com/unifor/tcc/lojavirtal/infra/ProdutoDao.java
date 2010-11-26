@@ -49,4 +49,9 @@ public class ProdutoDao implements EstoqueDeProdutos {
 				.filter("nome", nome).list();
 	}
 
+	@Override
+	public void recarrega(Produto produto) {
+		produto = obter(produto.getCodigo());
+	}
+
 }
