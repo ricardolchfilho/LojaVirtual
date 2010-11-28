@@ -41,7 +41,7 @@
 		<br clear="all"/>
 		
 		<div class="navegacao">
-			<a href='<c:url value="${logoutUrl}" />'>logout ${user.nickname}</a>
+			<a href="<c:url value="/logout"/>">logout ${userService.currentUser.nickname}</a>
 		</div>
 	</div>
 	<div id="erros">
@@ -54,14 +54,16 @@
 	<div id="body">
 		<div id="menu">
 			<ul>
-				<li><a href="<c:url value="/produtos/novo"/>">Novo Produto</a></li>
-				<li><a href="<c:url value="/produtos"/>">Lista Produtos</a></li>
+				<c:if test="${userService.userAdmin}">
+					<li><a href="<c:url value="/produtos/novo"/>">Novo Produto</a></li>
+				</c:if>
+				<li><a href="<c:url value="/produtos"/>">Lista de Produtos</a></li>
 				<li>
 					<form action="<c:url value="/produtos/busca"/>">
 						<input id="busca" name="nome"/>
 					</form>
 					<script type="text/javascript">
-						$("#busca").puts("Busca produtos por nome");
+						$("#busca").puts("Buscar produtos por nome");
 					</script>
 				</li>
 			</ul>

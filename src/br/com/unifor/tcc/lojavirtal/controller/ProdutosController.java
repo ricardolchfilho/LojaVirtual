@@ -12,6 +12,7 @@ import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.Validator;
 import br.com.caelum.vraptor.validator.Validations;
 import br.com.caelum.vraptor.view.Results;
+import br.com.unifor.tcc.lojavirtal.interceptor.Restrito;
 import br.com.unifor.tcc.lojavirtal.model.EstoqueDeProdutos;
 import br.com.unifor.tcc.lojavirtal.model.Produto;
 
@@ -47,8 +48,7 @@ public class ProdutosController {
 
 		List<Produto> produtoList = estoque.obter(nome); 
 		result.include("nome", nome)
-				.include("user", userService.getCurrentUser())
-				.include("logoutUrl", userService.createLogoutURL("/produtos"));
+				.include("userService", userService);
 		if (produtoList.isEmpty()) {
 			result.include("aviso", "Nenhum produto com o nome '" + nome
 					+ "' encontrado!");
@@ -58,13 +58,14 @@ public class ProdutosController {
 
 	@Get
 	@Path("/produtos/novo")
+	@Restrito
 	public void adicionarProduto() {
-		result.include("user", userService.getCurrentUser()).include(
-				"logoutUrl", userService.createLogoutURL("/produtos"));
+		result.include("userService", userService);
 	}
 
 	@Post
 	@Path("/produtos")
+	@Restrito
 	public void adicionarProduto(final Produto produto) {
 		validar(produto);
 		validator.onErrorRedirectTo(getClass()).adicionarProduto();
@@ -75,6 +76,7 @@ public class ProdutosController {
 
 	@Delete
 	@Path("/produtos/{codigo}")
+	@Restrito
 	public void deletarProduto(Long codigo) {
 		estoque.deletar(codigo);
 		result.include("aviso", "Produto deletado com sucesso!")
@@ -83,14 +85,15 @@ public class ProdutosController {
 
 	@Get
 	@Path("/produtos/{codigo}")
+	@Restrito
 	public Produto editarProduto(Long codigo) {
-		result.include("user", userService.getCurrentUser()).include(
-				"logoutUrl", userService.createLogoutURL("/produtos"));
+		result.include("userService", userService);
 		return estoque.obter(codigo);
 	}
 
 	@Put
 	@Path("/produtos/{produto.codigo}")
+	@Restrito
 	public void editarProduto(Produto produto) {
 		validar(produto);
 		validator.onErrorRedirectTo(getClass()).editarProduto(
@@ -104,8 +107,7 @@ public class ProdutosController {
 	@Path("/produtos")
 	public void lista() {
 		result.include("produtos", estoque.todos())
-				.include("user", userService.getCurrentUser())
-				.include("logoutUrl", userService.createLogoutURL("/produtos"));
+				.include("userService", userService);
 	}
 
 	private void validar(final Produto produto) {

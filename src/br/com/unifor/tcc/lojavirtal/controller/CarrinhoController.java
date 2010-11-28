@@ -47,25 +47,22 @@ public class CarrinhoController {
 		item.setProduto(estoqueDeProdutos.obter(item.getProduto().getCodigo()));
 		carrinho.adiciona(item);
 
-		result.include("user", userService.getCurrentUser())
-				.include("logoutUrl", userService.createLogoutURL("/produtos"))
-				.include(
-						"aviso",
-						"Produto '" + item.getProduto().getNome()
-								+ "' adicionado com sucesso no carrinho!")
+		result.include(
+				"aviso",
+				"Produto '" + item.getProduto().getNome()
+						+ "' adicionado com sucesso no carrinho!")
 				.redirectTo(ProdutosController.class).lista();
 	}
 
 	@Get
 	@Path("/carrinho")
 	public void visualiza() {
-		result.include("user", userService.getCurrentUser()).include(
-				"logoutUrl", userService.createLogoutURL("/produtos"));
+		result.include("userService", userService);
 	}
-	
+
 	@Delete
 	@Path("/carrinho/{indiceItem}")
-	public void remove(int indiceItem){
+	public void remove(int indiceItem) {
 		carrinho.remove(indiceItem);
 		result.redirectTo(getClass()).visualiza();
 	}

@@ -7,14 +7,16 @@ import br.com.caelum.vraptor.core.InterceptorStack;
 import br.com.caelum.vraptor.interceptor.Interceptor;
 import br.com.caelum.vraptor.resource.ResourceMethod;
 import br.com.caelum.vraptor.view.Results;
+import br.com.unifor.tcc.lojavirtal.controller.ProdutosController;
+import br.com.unifor.tcc.lojavirtal.controller.UsuariosController;
 
 import com.google.appengine.api.users.UserService;
 
 @Intercepts
 public class AuthorizationInterceptor implements Interceptor {
-	
+
 	private final UserService userService;
-	
+
 	private final Result result;
 
 	public AuthorizationInterceptor(UserService userService, Result result) {
@@ -24,24 +26,29 @@ public class AuthorizationInterceptor implements Interceptor {
 
 	@Override
 	public boolean accepts(ResourceMethod method) {
-		return !method.containsAnnotation(Public.class);
+		if (!userService.isUserLoggedIn()
+				|| method.containsAnnotation(Restrito.class)) {
+			return true;
+		}
+
+		return false;
 	}
 
 	@Override
 	public void intercept(InterceptorStack stack, ResourceMethod method,
 			Object object) throws InterceptionException {
-		
-		try {
-			if(userService.isUserAdmin()){
-				result.include("user", userService.getCurrentUser())
-				.include("logoutUrl", userService.createLogoutURL("/produtos"));
+
+		if (method.containsAnnotation(Restrito.class)) {
+			if (userService.isUserAdmin()) {
+				stack.next(method, object);
+			} else {
+				result.include("userService", userService)
+						.include("acessoRestrito", true)
+						.forwardTo("/WEB-INF/jsp/produtos/lista.jsp");
 			}
-			
+		} else {
 			stack.next(method, object);
-		} catch (IllegalStateException e) {
-			String loginUrl = userService.createLoginURL("/produtos");
-			result.redirectTo(loginUrl);
 		}
 	}
-	
+
 }

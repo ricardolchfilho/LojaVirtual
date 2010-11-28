@@ -4,7 +4,7 @@ import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
-import br.com.unifor.tcc.lojavirtal.interceptor.Public;
+import br.com.unifor.tcc.lojavirtal.interceptor.Restrito;
 import br.com.unifor.tcc.lojavirtal.model.EstoqueDeProdutos;
 
 @Resource
@@ -21,7 +21,7 @@ public class HomeController {
 	
 	@Get
 	@Path("/user")
-	@Public
+	@Restrito
 	public void index() {
 		result.include("produtos", estoque.produtosAVenda());
 	}
