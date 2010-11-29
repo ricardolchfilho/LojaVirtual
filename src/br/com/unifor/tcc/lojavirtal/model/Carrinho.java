@@ -1,20 +1,22 @@
 package br.com.unifor.tcc.lojavirtal.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PreDestroy;
+import javax.cache.Cache;
 
 import br.com.caelum.vraptor.ioc.Component;
 import br.com.caelum.vraptor.ioc.SessionScoped;
 
 @Component
 @SessionScoped
-public class Carrinho {
+public class Carrinho implements Serializable{
 	private List<Item> itens = new ArrayList<Item>();
 	private Integer unidades = 0;
 	private Double total = 0.0;
-
+	
 	public void adiciona(Item item) {
 		itens.add(item);
 		total += item.getProduto().getPreco() * item.getQuantidade();
@@ -55,7 +57,6 @@ public class Carrinho {
 		unidades -= removido.getQuantidade();
 	}
 
-	@PreDestroy
 	public void destroy(){
 		itens = new ArrayList<Item>();
 		unidades = 0;

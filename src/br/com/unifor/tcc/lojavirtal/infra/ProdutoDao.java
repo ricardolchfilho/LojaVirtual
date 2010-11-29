@@ -12,7 +12,7 @@ import com.googlecode.objectify.Objectify;
 public class ProdutoDao implements EstoqueDeProdutos {
 
 	private final Objectify objectify;
-
+	
 	public ProdutoDao(Objectify objectify) {
 		this.objectify = objectify;
 	}

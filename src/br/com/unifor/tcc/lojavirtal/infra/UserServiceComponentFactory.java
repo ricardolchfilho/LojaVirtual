@@ -1,12 +1,10 @@
 package br.com.unifor.tcc.lojavirtal.infra;
 
 import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
 
 import br.com.caelum.vraptor.ioc.ApplicationScoped;
 import br.com.caelum.vraptor.ioc.Component;
 import br.com.caelum.vraptor.ioc.ComponentFactory;
-import br.com.caelum.vraptor.ioc.SessionScoped;
 
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;

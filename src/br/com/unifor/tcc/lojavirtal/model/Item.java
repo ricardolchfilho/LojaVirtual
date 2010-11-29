@@ -1,7 +1,9 @@
 package br.com.unifor.tcc.lojavirtal.model;
 
+import java.io.Serializable;
 
-public class Item {
+
+public class Item implements Serializable{
 	private Produto produto;
 	private Integer quantidade;
 	
