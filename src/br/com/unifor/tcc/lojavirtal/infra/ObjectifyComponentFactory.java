@@ -5,8 +5,6 @@ import javax.annotation.PostConstruct;
 import br.com.caelum.vraptor.ioc.ApplicationScoped;
 import br.com.caelum.vraptor.ioc.Component;
 import br.com.caelum.vraptor.ioc.ComponentFactory;
-import br.com.unifor.tcc.lojavirtal.model.Carrinho;
-import br.com.unifor.tcc.lojavirtal.model.Item;
 import br.com.unifor.tcc.lojavirtal.model.Produto;
 
 import com.googlecode.objectify.Objectify;

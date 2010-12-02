@@ -7,18 +7,19 @@ import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
 import br.com.unifor.tcc.lojavirtal.model.Carrinho;
+import br.com.unifor.tcc.lojavirtal.model.CarrinhoRepositorio;
 
 @Resource
 public class UsuariosController {
 	
 	private Result result;
-	private Carrinho carrinho;
+	private CarrinhoRepositorio carrinhoRepositorio;
 	private UserService userService;
 	
-	public UsuariosController(Result result, Carrinho carrinho,
-			UserService userService) {
+	public UsuariosController(Result result,
+			CarrinhoRepositorio carrinhoRepositorio, UserService userService) {
 		this.result = result;
-		this.carrinho = carrinho;
+		this.carrinhoRepositorio = carrinhoRepositorio;
 		this.userService = userService;
 	}
 
@@ -31,7 +32,7 @@ public class UsuariosController {
 	@Get
 	@Path("/logout")
 	public void logout() {
-		carrinho.destroy();
+		carrinhoRepositorio.destroy();
 		result.redirectTo(userService.createLogoutURL("/")) ;
 	}
 }

@@ -4,19 +4,23 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.PreDestroy;
-import javax.cache.Cache;
-
 import br.com.caelum.vraptor.ioc.Component;
 import br.com.caelum.vraptor.ioc.SessionScoped;
 
 @Component
 @SessionScoped
-public class Carrinho implements Serializable{
+public class Carrinho implements Serializable,CarrinhoRepositorio{
+	
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private List<Item> itens = new ArrayList<Item>();
 	private Integer unidades = 0;
 	private Double total = 0.0;
 	
+	@Override
 	public void adiciona(Item item) {
 		itens.add(item);
 		total += item.getProduto().getPreco() * item.getQuantidade();
@@ -50,13 +54,15 @@ public class Carrinho implements Serializable{
 	public void setUnidades(Integer unidades) {
 		this.unidades = unidades;
 	}
-
+	
+	@Override
 	public void remove(int indiceItem) {
 		Item removido = itens.remove(indiceItem);
 		total -= removido.getProduto().getPreco() * removido.getQuantidade();
 		unidades -= removido.getQuantidade();
 	}
-
+	
+	@Override
 	public void destroy(){
 		itens = new ArrayList<Item>();
 		unidades = 0;

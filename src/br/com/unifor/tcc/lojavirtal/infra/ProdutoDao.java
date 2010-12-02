@@ -23,12 +23,6 @@ public class ProdutoDao implements EstoqueDeProdutos {
 	}
 
 	@Override
-	public List<Produto> produtosAVenda() {
-		return (List<Produto>) objectify.query(Produto.class)
-				.filter("vendido", false).list();
-	}
-
-	@Override
 	public List<Produto> todos() {
 		return (List<Produto>) objectify.query(Produto.class).list();
 	}

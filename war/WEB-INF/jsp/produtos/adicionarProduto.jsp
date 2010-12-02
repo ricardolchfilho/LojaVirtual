@@ -9,12 +9,12 @@
 			name="produto.nome" value="${produto.nome}" style="width: 150px"/> 
 		
 		<label for="descricao">Descrição:</label> 
-		<textarea id="descricao" name="produto.descricao" class="requerid" 
-			 minlength="1" maxlength="40" style="width: 150px">${produto.descricao}</textarea>
+		<textarea id="descricao" class="requerid" minlength="1" maxlength="40" name="produto.descricao"  
+			  style="width: 150px">${produto.descricao}</textarea>
 		
 		<label for="preco">Preço:</label>
-		<input id="preco" type="text" name="produto.preco" value="${produto.preco}"
-			class="requerid" min="0" style="width: 100px"/>
+		<input id="preco" class="requerid" min="0" type="text" name="produto.preco" 
+		value="${produto.preco}" style="width: 100px"/>
 		
 		<button type="submit">Enviar</button>
 		
@@ -22,6 +22,6 @@
 </form>
 
 <script type="text/javascript">
-	$('#produtosForm1').validate();
+	$('#produtosForm').validate();
 </script>
 <%@ include file="../../../common/admin/footer.jsp"%>

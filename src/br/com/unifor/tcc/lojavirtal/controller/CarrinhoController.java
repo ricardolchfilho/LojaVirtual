@@ -8,7 +8,7 @@ import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.Validator;
 import br.com.caelum.vraptor.validator.Validations;
-import br.com.unifor.tcc.lojavirtal.model.Carrinho;
+import br.com.unifor.tcc.lojavirtal.model.CarrinhoRepositorio;
 import br.com.unifor.tcc.lojavirtal.model.EstoqueDeProdutos;
 import br.com.unifor.tcc.lojavirtal.model.Item;
 
@@ -17,16 +17,16 @@ import com.google.appengine.api.users.UserService;
 @Resource
 public class CarrinhoController {
 	private Result result;
-	private Carrinho carrinho;
+	private CarrinhoRepositorio carrinhoRepositorio;
 	private Validator validator;
 	private UserService userService;
 	private EstoqueDeProdutos estoqueDeProdutos;
 
-	public CarrinhoController(Result result, Carrinho carrinho,
-			Validator validator, UserService userService,
-			EstoqueDeProdutos estoqueDeProdutos) {
+	public CarrinhoController(Result result,
+			CarrinhoRepositorio carrinhoRepositorio, Validator validator,
+			UserService userService, EstoqueDeProdutos estoqueDeProdutos) {
 		this.result = result;
-		this.carrinho = carrinho;
+		this.carrinhoRepositorio = carrinhoRepositorio;
 		this.validator = validator;
 		this.userService = userService;
 		this.estoqueDeProdutos = estoqueDeProdutos;
@@ -45,7 +45,7 @@ public class CarrinhoController {
 		validator.onErrorRedirectTo(ProdutosController.class).lista();
 
 		item.setProduto(estoqueDeProdutos.obter(item.getProduto().getCodigo()));
-		carrinho.adiciona(item);
+		carrinhoRepositorio.adiciona(item);
 
 		result.include(
 				"aviso",
@@ -63,7 +63,7 @@ public class CarrinhoController {
 	@Delete
 	@Path("/carrinho/{indiceItem}")
 	public void remove(int indiceItem) {
-		carrinho.remove(indiceItem);
+		carrinhoRepositorio.remove(indiceItem);
 		result.redirectTo(getClass()).visualiza();
 	}
 

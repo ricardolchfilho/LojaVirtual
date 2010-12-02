@@ -10,8 +10,6 @@ public interface EstoqueDeProdutos {
 	
 	Produto obter(Long codigo);
 
-	List<Produto> produtosAVenda();
-	
 	List<Produto> todos();
 
 	List<Produto> obter(String nome);

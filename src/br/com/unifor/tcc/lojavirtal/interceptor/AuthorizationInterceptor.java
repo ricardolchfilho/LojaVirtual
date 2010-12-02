@@ -6,9 +6,6 @@ import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.core.InterceptorStack;
 import br.com.caelum.vraptor.interceptor.Interceptor;
 import br.com.caelum.vraptor.resource.ResourceMethod;
-import br.com.caelum.vraptor.view.Results;
-import br.com.unifor.tcc.lojavirtal.controller.ProdutosController;
-import br.com.unifor.tcc.lojavirtal.controller.UsuariosController;
 
 import com.google.appengine.api.users.UserService;
 

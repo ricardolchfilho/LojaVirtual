@@ -4,6 +4,11 @@ import java.io.Serializable;
 
 
 public class Item implements Serializable{
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Produto produto;
 	private Integer quantidade;
 	
